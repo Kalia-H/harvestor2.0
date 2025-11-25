@@ -16,9 +16,25 @@ import threading
 from gui.interface import mainWindow
 
 def display_results(window, extractedList):
+    #Using the Treeview widget from the passed window instance
+    tree = window.tableResults
+
+    #Clearing any existing rows
+    for row in tree.get_children():
+        tree.delete(row)
+
     for extract in extractedList:
-        new_row = tree.insert(parent=prev_row, position=END, values=extract)
-        prev_row = new_row
+        #Iterating through each extracted item
+        if isinstance(extract, (list, tuple)):
+            #If the item is a list or tuple, pass it directly 
+            values = extract
+        else:
+            #If the item is a single value, wrap it in a one-element tuple
+            values = (extract,)
+        #inserting the extracted item into the treeview at the parent level
+        tree.insert('', 'end', values=values)
+
+#FUNCTION - Holds the logic flow        
 def full_operation(window):
     #running createHeader function from engine.py to create and store the header
     header = core.createHeader()
@@ -57,6 +73,7 @@ def full_operation(window):
 
     #running display_results
     display_results(window, extracted_list)
+
 #Function - handling submit button 
 def onSubmit(window):
     print("onSubmit ran")

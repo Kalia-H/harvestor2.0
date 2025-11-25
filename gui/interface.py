@@ -55,7 +55,9 @@ class mainWindow:
         self.labelResults.place(x=15,y=100)
 
         #Tree results table
-        self.tableResults = ttk.Treeview(self.scrapperWindow, columns=("Headers:"))
+        self.tableResults = ttk.Treeview(self.scrapperWindow, columns=("Headers",), show='headings')
+        self.tableResults.heading("Headers", text="Headers")
+        self.tableResults.column("Headers", width=540)
         self.tableResults.place(x=15,y=130)
                                     
         #Label export data
@@ -66,9 +68,9 @@ class mainWindow:
         self.buttonExport = tk.Button(text="Export",bg="#2f4f4f")
         self.buttonExport.place(x=425,y=340)
 
-        #Function - creating a live window
-        def run(self):
-            self.scrapperWindow.mainloop()
+    #Function - creating a live window
+    def run(self):
+        self.scrapperWindow.mainloop()
 
 
 #Function - getting the entered URL
