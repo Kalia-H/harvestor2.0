@@ -24,18 +24,14 @@ class mainWindow:
 
         #Label for URL entry field
         self.labelURL = tk.Label(self.scrapperWindow, text="Enter URL: ",bg="#2f4f4f")
-        self.labelURL.place(x=15,y=15)
+        self.labelURL.place(x=15,y=40)
 
         #URL input field
         self.entryURL = tk.Entry(self.scrapperWindow)
-        self.entryURL.place(x=80,y=15)
-
-        #Label for access status
-        self.labelStatus = tk.Label(text="Access Granted",font=("Helvetica",15),bg="#2f4f4f")
-        self.labelStatus.place(x=15,y=55)
+        self.entryURL.place(x=80,y=40)
 
         #Label for HTML element options dropdown box
-        self.labelElements = tk.Label(self.scrapperWindow, text="Searchables: ",bg="#2f4f4f")
+        self.labelElements = tk.Label(self.scrapperWindow, text="Search: ",bg="#2f4f4f")
         self.labelElements.place(x=225,y=15)
         
         #List of dropdown options
@@ -48,7 +44,7 @@ class mainWindow:
 
         #Button submit
         self.buttonSubmit = tk.Button(self.scrapperWindow, text="Submit",bg="#2f4f4f")
-        self.buttonSubmit.place(x=335,y=15)
+        self.buttonSubmit.place(x=400,y=15)
 
         #Label results section
         self.labelResults = tk.Label(self.scrapperWindow, text="Results:",bg="#2f4f4f")
@@ -62,11 +58,11 @@ class mainWindow:
                                     
         #Label export data
         self.labelExport = tk.Label(text="Export to CSV",bg="#2f4f4f")
-        self.labelExport.place(x=425,y=315)
+        self.labelExport.place(x=485,y=375)
 
         #Button export
         self.buttonExport = tk.Button(text="Export",bg="#2f4f4f")
-        self.buttonExport.place(x=425,y=340)
+        self.buttonExport.place(x=515,y=395)
 
     #Function - creating a live window
     def run(self):
