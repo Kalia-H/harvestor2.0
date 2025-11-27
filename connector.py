@@ -12,9 +12,12 @@ import gui.interface as face
 import tkinter as tk
 import time
 import threading
-
+import writeCSV as write
+from writeCSV import fileWindow
 from gui.interface import mainWindow
 
+
+#FUNCTION: displaying results onto gui
 def display_results(window, extractedList):
     #Using the Treeview widget from the passed window instance
     tree = window.tableResults
@@ -66,24 +69,48 @@ def full_operation(window):
 
     #extracting specific data (process 3)
     #soup, tag
-    extracted_list = core.extract_data(site_soup, tag)
-
+    results = core.extract_data(site_soup, tag)
+    
+    #storing results into a windows attribute
+    #this allows the extracted_list to be accessed throughout all functions through the activeWindow class in interface.py
+    #created at runtime
+    window.extracted_list = results
+    
     ####TEST
-    print(extracted_list)
+    print(results)
 
     #running display_results
-    display_results(window, extracted_list)
+    display_results(window, results)
 
-#Function - handling submit button 
+#FUNCTION - handling submit button 
 def onSubmit(window):
+    ####TEST
     print("onSubmit ran")
+
+    #calling full_operation to start the scraping pipeline
     full_operation(window)
+
+#FUNCTION - handing export button
+def onExport(window):
+    #####TEST
+    print("onExport:")
+    print(window.extracted_list)
+
+    #creating an instance of the fileWindow from writeCSV.py
+    write.fileWindow()
+
+    #calling write_to_csv from writeCSV.py
+    export = write.write_to_csv(window.extracted_list, fileWindow.file_path)
 
 #creating an instance of the mainWindow class from interface.py
 activeWindow = mainWindow()
 
 #adding a functionionality from engine.py to the submit button from interface.py
 activeWindow.buttonSubmit.config(command=lambda: onSubmit(activeWindow))
+
+#adding functionionality from writeCSV.py to the "export CSV" button from
+#interface.py
+activeWindow.buttonExport.config(command=lambda: onExport(activeWindow))
 
 
 
