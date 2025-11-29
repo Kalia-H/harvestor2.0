@@ -15,6 +15,7 @@ import threading
 import writeCSV as write
 from writeCSV import fileWindow
 from gui.interface import mainWindow
+import imageHandler as handler
 
 
 #FUNCTION: displaying results onto gui
@@ -36,6 +37,15 @@ def display_results(window, extractedList):
             values = (extract,)
         #inserting the extracted item into the treeview at the parent level
         tree.insert('', 'end', values=values)
+
+#FUNCTION - displaying images onto gui
+def display_image_results(window, images):
+    
+    #####TEST
+    print("display_image_results called succesfully")
+    
+    
+
 
 #FUNCTION - Holds the logic flow        
 def full_operation(window):
@@ -79,8 +89,15 @@ def full_operation(window):
     ####TEST
     print(results)
 
-    #running display_results
-    display_results(window, results)
+    #checking the selected tag
+    if (tag == "img"):
+        #unpacking the treeview
+        window.tableResults.place_forget()
+
+        #calling the display_image_results function
+        display_image_results(window, results)
+    else:
+        display_results(window, results)
 
 #FUNCTION - handling submit button 
 def onSubmit(window):
